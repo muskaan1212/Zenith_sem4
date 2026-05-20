@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/ejs.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Server-Side Rendering Demo</p>
+        <h1><%= title %></h1>
+        <p>Generated on <strong><%= generatedAt %></strong> using Express + EJS.</p>
+      </section>
+
+      <section class="panel">
+        <h2>Request Flow</h2>
+        <ul class="timeline">
+          <% requestFlow.forEach(function(step) { %>
+            <li><%= step %></li>
+          <% }) %>
+        </ul>
+      </section>
+
+      <section class="grid">
+        <% report.forEach(function(item) { %>
+          <article class="card">
+            <p class="label"><%= item.label %></p>
+            <h3><%= item.status %></h3>
+          </article>
+        <% }) %>
+      </section>
+
+      <section class="panel">
+        <h2>Database Status</h2>
+        <% if (database.connected) { %>
+          <p class="good"><%= database.message %></p>
+        <% } else { %>
+          <p class="warn"><%= database.message %></p>
+        <% } %>
+      </section>
+    </main>
+  </body>
+</html>

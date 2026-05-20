@@ -1,0 +1,568 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zenith Concept Lab</title>
+    <style>
+      :root {
+        --bg: #eff6ff;
+        --surface: #ffffff;
+        --surface-soft: #f8fbff;
+        --text: #183153;
+        --muted: #5f7396;
+        --line: #dbe7fb;
+        --primary: #4b74ff;
+        --primary-deep: #2d56df;
+        --success: #18794e;
+        --radius: 24px;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: linear-gradient(180deg, #eef6ff 0%, #f8fbff 52%, #ffffff 100%);
+        color: var(--text);
+      }
+
+      a { color: inherit; }
+
+      .shell {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 20px 72px;
+      }
+
+      .hero {
+        display: grid;
+        gap: 24px;
+        grid-template-columns: 1.25fr 0.95fr;
+        align-items: stretch;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: 0 20px 60px rgba(62, 99, 221, 0.08);
+      }
+
+      .hero-main {
+        padding: 34px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #e8f0ff;
+        color: var(--primary-deep);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        margin: 18px 0 14px;
+        font-size: clamp(2.2rem, 4vw, 4rem);
+        line-height: 1;
+      }
+
+      .hero p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.8;
+      }
+
+      .hero-side {
+        padding: 28px;
+        display: grid;
+        gap: 14px;
+        align-content: start;
+      }
+
+      .badge-grid {
+        display: grid;
+        gap: 12px;
+      }
+
+      .mini {
+        border-radius: 20px;
+        padding: 16px 18px;
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+      }
+
+      .mini strong {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      .mini span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .actions {
+        margin-top: 22px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .btn, button {
+        border: 0;
+        cursor: pointer;
+        border-radius: 14px;
+        padding: 12px 16px;
+        font: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        transition: transform 140ms ease, box-shadow 140ms ease, background 140ms ease;
+      }
+
+      .btn:hover, button:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary, .primary {
+        background: var(--primary);
+        color: white;
+        box-shadow: 0 12px 28px rgba(75, 116, 255, 0.22);
+      }
+
+      .btn-secondary, .secondary {
+        background: white;
+        color: var(--text);
+        border: 1px solid var(--line);
+      }
+
+      .section-grid {
+        margin-top: 28px;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .panel {
+        padding: 24px;
+      }
+
+      .panel h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .stack {
+        margin-top: 18px;
+        display: grid;
+        gap: 12px;
+      }
+
+      .button-row {
+        margin-top: 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid var(--line);
+        background: var(--surface-soft);
+        border-radius: 16px;
+        padding: 13px 14px;
+        color: var(--text);
+        font: inherit;
+      }
+
+      textarea { min-height: 112px; resize: vertical; }
+
+      pre {
+        margin: 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 12px;
+        line-height: 1.7;
+        color: #395278;
+      }
+
+      .output {
+        background: var(--surface-soft);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 14px;
+      }
+
+      .links {
+        display: grid;
+        gap: 12px;
+      }
+
+      .link-card {
+        display: block;
+        text-decoration: none;
+        padding: 16px 18px;
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface-soft);
+      }
+
+      .link-card strong {
+        display: block;
+        font-size: 14px;
+      }
+
+      .link-card span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
+      .chat-list {
+        display: grid;
+        gap: 10px;
+        max-height: 300px;
+        overflow: auto;
+      }
+
+      .chat-item {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: var(--surface-soft);
+        padding: 12px 14px;
+      }
+
+      .chat-item strong {
+        display: block;
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+
+      .status {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--success);
+      }
+
+      .subtle {
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        background: #edf3ff;
+        border-radius: 8px;
+        padding: 2px 6px;
+      }
+
+      @media (max-width: 980px) {
+        .hero,
+        .section-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <section class="hero">
+        <div class="card hero-main">
+          <span class="eyebrow">Zenith Concept Host</span>
+          <h1>Backend Lab on a Separate Local Host</h1>
+          <p>
+            This host keeps the backend concept demos outside the main healthcare site.
+            It talks to the same Express backend on <code>localhost:3001</code> and
+            shows middleware flow, sessions, authentication, MongoDB CRUD, EJS pages,
+            and Socket.IO on its own standalone page.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="http://localhost:3001/server-report" target="_blank" rel="noreferrer">Open Server Report</a>
+            <a class="btn btn-secondary" href="http://localhost:3001/admin-ejs" target="_blank" rel="noreferrer">Open Admin EJS</a>
+            <a class="btn btn-secondary" href="http://localhost:3000" target="_blank" rel="noreferrer">Back to Main Zenith Site</a>
+          </div>
+        </div>
+        <aside class="card hero-side">
+          <div class="badge-grid">
+            <div class="mini">
+              <strong>Host split</strong>
+              <span>Main site stays on <code>3000</code>. Concept Lab runs here on <code>3002</code>.</span>
+            </div>
+            <div class="mini">
+              <strong>Backend shared</strong>
+              <span>All demos still use the same Express app, MongoDB connection, sessions, and sockets.</span>
+            </div>
+            <div class="mini">
+              <strong>Socket enabled</strong>
+              <span>Real-time chat and ping-pong still work through the backend Socket.IO server.</span>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section-grid">
+        <article class="card panel">
+          <h2>Middleware + Request Flow</h2>
+          <p>Trigger the Express concept routes and inspect the exact JSON response returned by the backend.</p>
+          <div class="button-row">
+            <button class="primary" id="load-flow">Load Request Flow</button>
+            <button class="secondary" id="load-blocking">Blocking Demo</button>
+            <button class="secondary" id="load-nonblocking">Non-Blocking Demo</button>
+          </div>
+          <div class="stack">
+            <div class="output"><pre id="flow-output">Run a demo to view the backend response here.</pre></div>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <h2>EJS Pages</h2>
+          <p>These links open the server-rendered pages directly from Express without going through the main site.</p>
+          <div class="stack links">
+            <a class="link-card" href="http://localhost:3001/server-report" target="_blank" rel="noreferrer">
+              <strong>/server-report</strong>
+              <span>SSR page with request flow, timing, and live backend status.</span>
+            </a>
+            <a class="link-card" href="http://localhost:3001/admin-ejs" target="_blank" rel="noreferrer">
+              <strong>/admin-ejs</strong>
+              <span>SSR page that demonstrates EJS loops, conditionals, and dynamic data.</span>
+            </a>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <h2>Sessions + Cookies</h2>
+          <p>Use the same Express session routes from a separate host. Cookies remain scoped by the backend response.</p>
+          <div class="button-row">
+            <button class="primary" id="set-session">Set Session</button>
+            <button class="secondary" id="check-session">Check Session</button>
+            <button class="secondary" id="logout-session">Logout Session</button>
+          </div>
+          <div class="stack">
+            <div class="output"><pre id="session-output">Session output will appear here.</pre></div>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <h2>Authentication</h2>
+          <p>Register a demo user, log in with JWT, or use Passport local strategy. Then call the protected profile route.</p>
+          <div class="stack">
+            <input id="auth-name" value="Zenith Student" />
+            <input id="auth-email" value="student@example.com" />
+            <input id="auth-password" type="password" value="password123" />
+          </div>
+          <div class="button-row">
+            <button class="primary" id="register-user">Register</button>
+            <button class="secondary" id="login-user">Login JWT</button>
+            <button class="secondary" id="passport-login">Passport Login</button>
+            <button class="secondary" id="load-profile">Load Profile</button>
+          </div>
+          <div class="stack">
+            <div class="output"><pre id="auth-output">Authentication result will appear here.</pre></div>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <h2>MongoDB + Mongoose</h2>
+          <p>Create and refresh concept notes through the Mongoose CRUD route on the backend.</p>
+          <div class="stack">
+            <input id="note-title" value="JWT protects private routes" />
+            <input id="note-category" value="auth" />
+            <textarea id="note-content">This note was created from the separate Concepts host using the same Zenith backend.</textarea>
+            <input id="note-tags" value="jwt, bcrypt, passport" />
+          </div>
+          <div class="button-row">
+            <button class="primary" id="create-note">Create Note</button>
+            <button class="secondary" id="refresh-notes">Refresh Notes</button>
+          </div>
+          <div class="stack">
+            <div class="output"><pre id="notes-output">Saved concept notes will appear here.</pre></div>
+          </div>
+        </article>
+
+        <article class="card panel">
+          <h2>Socket.IO Live Demo</h2>
+          <p>Connect to the backend socket server, send a ping, and broadcast chat messages from this separate host.</p>
+          <div class="stack">
+            <div class="status" id="socket-status">Connecting to Socket.IO...</div>
+            <div class="subtle" id="pong-output">Send a ping to see the backend reply.</div>
+            <input id="chat-author" value="Zenith Demo" />
+            <input id="chat-text" placeholder="Type a live chat message" />
+          </div>
+          <div class="button-row">
+            <button class="primary" id="send-ping">Send Ping</button>
+            <button class="secondary" id="send-chat">Send Chat</button>
+          </div>
+          <div class="stack chat-list" id="chat-list">
+            <div class="chat-item">
+              <strong>Instructions</strong>
+              Open this host in another tab or browser to watch messages appear in real time.
+            </div>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script src="http://localhost:3001/socket.io/socket.io.js"></script>
+    <script>
+      const API_BASE = 'http://localhost:3001'
+      const output = (id, data) => {
+        document.getElementById(id).textContent = typeof data === 'string' ? data : JSON.stringify(data, null, 2)
+      }
+
+      let authToken = ''
+      const socket = window.io(API_BASE, { withCredentials: true })
+
+      socket.on('connect', () => {
+        document.getElementById('socket-status').textContent = `Connected to Socket.IO as ${socket.id}`
+      })
+
+      socket.on('server:welcome', (payload) => {
+        document.getElementById('socket-status').textContent = payload.message
+      })
+
+      socket.on('notification:pong', (payload) => {
+        document.getElementById('pong-output').textContent = `${payload.text} (${new Date(payload.createdAt).toLocaleTimeString()})`
+      })
+
+      socket.on('chat:new', (message) => {
+        const list = document.getElementById('chat-list')
+        const item = document.createElement('div')
+        item.className = 'chat-item'
+        item.innerHTML = `<strong>${message.author}</strong>${message.text}`
+        list.prepend(item)
+      })
+
+      async function request(path, options = {}) {
+        const response = await fetch(`${API_BASE}${path}`, {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            ...(options.token ? { Authorization: `Bearer ${options.token}` } : {}),
+          },
+          ...options,
+        })
+
+        const payload = await response.json().catch(() => ({}))
+        if (!response.ok) {
+          throw new Error(payload.error || payload.message || `Request failed: ${response.status}`)
+        }
+        return payload
+      }
+
+      document.getElementById('load-flow').onclick = async () => {
+        try { output('flow-output', await request('/concepts/request-flow')) } catch (error) { output('flow-output', error.message) }
+      }
+      document.getElementById('load-blocking').onclick = async () => {
+        try { output('flow-output', await request('/concepts/blocking-demo')) } catch (error) { output('flow-output', error.message) }
+      }
+      document.getElementById('load-nonblocking').onclick = async () => {
+        try { output('flow-output', await request('/concepts/non-blocking-demo')) } catch (error) { output('flow-output', error.message) }
+      }
+
+      document.getElementById('set-session').onclick = async () => {
+        try { output('session-output', await request('/session/set?theme=light')) } catch (error) { output('session-output', error.message) }
+      }
+      document.getElementById('check-session').onclick = async () => {
+        try { output('session-output', await request('/session/check')) } catch (error) { output('session-output', error.message) }
+      }
+      document.getElementById('logout-session').onclick = async () => {
+        try { output('session-output', await request('/session/logout')) } catch (error) { output('session-output', error.message) }
+      }
+
+      function authForm() {
+        return {
+          name: document.getElementById('auth-name').value,
+          email: document.getElementById('auth-email').value,
+          password: document.getElementById('auth-password').value,
+        }
+      }
+
+      document.getElementById('register-user').onclick = async () => {
+        try {
+          output('auth-output', await request('/auth/register', { method: 'POST', body: JSON.stringify(authForm()) }))
+        } catch (error) {
+          output('auth-output', error.message)
+        }
+      }
+
+      document.getElementById('login-user').onclick = async () => {
+        try {
+          const result = await request('/auth/login', { method: 'POST', body: JSON.stringify(authForm()) })
+          authToken = result.token
+          output('auth-output', result)
+        } catch (error) {
+          output('auth-output', error.message)
+        }
+      }
+
+      document.getElementById('passport-login').onclick = async () => {
+        try {
+          const result = await request('/auth/login/passport', { method: 'POST', body: JSON.stringify(authForm()) })
+          authToken = result.token
+          output('auth-output', result)
+        } catch (error) {
+          output('auth-output', error.message)
+        }
+      }
+
+      document.getElementById('load-profile').onclick = async () => {
+        try {
+          output('auth-output', await request('/auth/profile', { token: authToken }))
+        } catch (error) {
+          output('auth-output', error.message)
+        }
+      }
+
+      function noteForm() {
+        return {
+          title: document.getElementById('note-title').value,
+          category: document.getElementById('note-category').value,
+          content: document.getElementById('note-content').value,
+          tags: document.getElementById('note-tags').value.split(',').map((item) => item.trim()).filter(Boolean),
+        }
+      }
+
+      document.getElementById('create-note').onclick = async () => {
+        try {
+          output('notes-output', await request('/db/notes', { method: 'POST', body: JSON.stringify(noteForm()) }))
+        } catch (error) {
+          output('notes-output', error.message)
+        }
+      }
+
+      document.getElementById('refresh-notes').onclick = async () => {
+        try {
+          output('notes-output', await request('/db/notes'))
+        } catch (error) {
+          output('notes-output', error.message)
+        }
+      }
+
+      document.getElementById('send-ping').onclick = () => {
+        socket.emit('notification:ping')
+      }
+
+      document.getElementById('send-chat').onclick = () => {
+        const author = document.getElementById('chat-author').value
+        const text = document.getElementById('chat-text').value
+        if (!text.trim()) return
+        socket.emit('chat:send', { author, text })
+        document.getElementById('chat-text').value = ''
+      }
+    </script>
+  </body>
+  </html>

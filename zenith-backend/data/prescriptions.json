@@ -1,0 +1,35 @@
+[
+    {
+        "id": 1,
+        "med": "Aspirin",
+        "dose": "100mg",
+        "freq": "Once daily",
+        "by": "Dr. A. Sharma",
+        "start": "2025-10-01",
+        "end": "2025-12-31",
+        "refills": 2,
+        "status": "active"
+    },
+    {
+        "id": 2,
+        "med": "Metformin",
+        "dose": "500mg",
+        "freq": "Twice daily",
+        "by": "Dr. P. Gupta",
+        "start": "2025-09-15",
+        "end": "2026-03-15",
+        "refills": 5,
+        "status": "active"
+    },
+    {
+        "id": 3,
+        "med": "Amoxicillin",
+        "dose": "250mg",
+        "freq": "Three times daily",
+        "by": "Dr. R. Mehta",
+        "start": "2025-09-01",
+        "end": "2025-09-14",
+        "refills": 0,
+        "status": "completed"
+    }
+]

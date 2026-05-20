@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "author": "Sarah Johnson",
+    "type": "doctor",
+    "rating": 5,
+    "subject": "Excellent Service",
+    "message": "Dr. Sharma provided exceptional care and was very attentive to my concerns.",
+    "date": "2025-10-20",
+    "createdAt": "2025-10-20T12:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "author": "Michael Chen",
+    "type": "service",
+    "rating": 4,
+    "subject": "Good Experience",
+    "message": "Overall a great experience. Waiting time could be slightly reduced.",
+    "date": "2025-10-18",
+    "createdAt": "2025-10-18T15:00:00.000Z"
+  },
+  {
+    "id": 1775725726798,
+    "author": "You",
+    "type": "service",
+    "rating": 5,
+    "subject": "excellent service",
+    "message": "amazing",
+    "date": "2026-04-09",
+    "createdAt": "2026-04-09T09:08:46.798Z"
+  },
+  {
+    "id": 1777445454639,
+    "author": "You",
+    "type": "facility",
+    "rating": 5,
+    "subject": "nice",
+    "message": "good",
+    "date": "2026-04-29",
+    "createdAt": "2026-04-29T06:50:54.639Z"
+  }
+]

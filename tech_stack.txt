@@ -1,0 +1,29 @@
+========================================
+  ZENITH HEALTHCARE — TECH STACK
+========================================
+
+FRONTEND
+----------------------------------------
+Framework:     Next.js 16.0.0 (App Router)
+Library:       React 18.3.1
+Styling:       Tailwind CSS 4.x
+UI Components: Radix UI / shadcn/ui
+Icons:         Lucide React 0.454
+Animations:    Framer Motion 12.x
+Charts:        Recharts 2.x
+Forms:         React Hook Form + Zod
+
+BACKEND
+----------------------------------------
+Framework:     Express.js 5.x
+Runtime:       Node.js 24.x
+File Uploads:  Multer 2.1
+Data Store:    JSON flat files (No SQL/NoSQL DB)
+Dev Server:    Nodemon
+
+LANGUAGES & TOOLS
+----------------------------------------
+Language:      JavaScript (ES2022+) / JSX
+Package Mgr:   npm / pnpm
+
+========================================

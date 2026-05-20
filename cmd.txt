@@ -1,0 +1,56 @@
+========================================
+  ZENITH HEALTHCARE — HOW TO RUN
+========================================
+
+IMPORTANT: You need TWO terminals open — one for the backend, one for the frontend.
+Run the backend FIRST, then the frontend.
+
+----------------------------------------
+  TERMINAL 1 — BACKEND (Express API)
+----------------------------------------
+Command:
+    node /Users/muskaan/Downloads/Zenith/zenith-backend/app.js
+
+OR navigate into the folder first:
+    cd /Users/muskaan/Downloads/Zenith/zenith-backend
+    node app.js
+
+Runs on: http://localhost:3001
+Health check: http://localhost:3001/health
+
+API Routes available:
+  GET/POST  http://localhost:3001/appointments
+  GET/POST  http://localhost:3001/prescriptions
+  GET/POST  http://localhost:3001/feedback
+  GET/POST  http://localhost:3001/records
+
+----------------------------------------
+  TERMINAL 2 — FRONTEND (Next.js)
+----------------------------------------
+Command:
+    cd /Users/muskaan/Downloads/Zenith
+    npm run dev
+
+Runs on: http://localhost:3000
+
+Pages available:
+  http://localhost:3000/              → Home
+  http://localhost:3000/dashboard     → Dashboard
+  http://localhost:3000/appointments  → Appointments
+  http://localhost:3000/prescriptions → Prescriptions
+  http://localhost:3000/wellness      → Wellness Tips
+  http://localhost:3000/feedback      → Feedback
+  http://localhost:3000/server-status → Backend Status
+
+----------------------------------------
+  NOTES
+----------------------------------------
+- Port 5000 is blocked by macOS (AirPlay/ControlCenter).
+  The backend uses port 3001 instead.
+
+- Both servers must be running at the same time
+  for the frontend to load live data.
+
+- To stop a server: press Ctrl + C in its terminal.
+
+========================================

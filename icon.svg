@@ -1,0 +1,11 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="zenithIcon" x1="18" y1="14" x2="164" y2="166" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7EA2FF"/>
+      <stop offset="1" stop-color="#4D78F3"/>
+    </linearGradient>
+  </defs>
+  <rect width="180" height="180" rx="52" fill="url(#zenithIcon)"/>
+  <path d="M52 61C52 54.9249 56.9249 50 63 50H117C123.075 50 128 54.9249 128 61C128 63.6996 127.014 66.3022 125.223 68.3214L81.5111 118H117C123.075 118 128 122.925 128 129C128 135.075 123.075 140 117 140H63C56.9249 140 52 135.075 52 129C52 126.3 52.9862 123.698 54.7774 121.679L98.4889 72H63C56.9249 72 52 67.0751 52 61Z" fill="white"/>
+  <path d="M95.6335 39L82.1226 62.4H109.144L95.6335 39Z" fill="#DCE7FF"/>
+</svg>

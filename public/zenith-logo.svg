@@ -1,0 +1,12 @@
+<svg width="232" height="52" viewBox="0 0 232 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="zenithMark" x1="4" y1="4" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7EA2FF"/>
+      <stop offset="1" stop-color="#4D78F3"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="48" height="48" rx="16" fill="url(#zenithMark)"/>
+  <path d="M15 17.5C15 15.567 16.567 14 18.5 14H33.5C35.433 14 37 15.567 37 17.5C37 18.359 36.686 19.188 36.116 19.831L23.861 33.75H33.5C35.433 33.75 37 35.317 37 37.25C37 39.183 35.433 40.75 33.5 40.75H18.5C16.567 40.75 15 39.183 15 37.25C15 36.391 15.314 35.562 15.884 34.919L28.139 21H18.5C16.567 21 15 19.433 15 17.5Z" fill="white"/>
+  <path d="M25.985 11.5L22.858 16.917H29.111L25.985 11.5Z" fill="#DCE7FF"/>
+  <text x="66" y="35" fill="#183153" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="-0.04em">Zenith</text>
+</svg>

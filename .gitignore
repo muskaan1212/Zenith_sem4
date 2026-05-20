@@ -1,0 +1,8 @@
+zenith-backend/node_modules/
+zenith-backend/dist/
+zenith-backend/.env
+zenith-frontend/node_modules/
+zenith-frontend/dist/
+zenith-frontend/.env
+node_modules/
+dist/

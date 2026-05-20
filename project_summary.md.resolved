@@ -1,0 +1,158 @@
+# Zenith Healthcare — Project Summary & Concept Checklist
+
+## Project Overview
+
+**Zenith Healthcare** is a full-stack web application built with:
+- **Frontend**: Next.js 16 (App Router, React, Tailwind CSS) — `localhost:3000`
+- **Backend**: Node.js + Express — `localhost:3001`
+- **Data storage**: JSON flat files (`zenith-backend/data/`)
+
+---
+
+## Backend Checklist
+
+### ✅ Handling Endpoints
+**Status: Implemented**
+
+The backend exposes 6 REST API endpoints across 4 route files:
+
+| Endpoint | Method | File | Description |
+|---|---|---|---|
+| `/` | GET | `app.js` | Health/root check |
+| `/health` | GET | `app.js` | Detailed status of all routes |
+| `/appointments` | GET, POST | `routes/appointments.js` | Book & list appointments |
+| `/prescriptions` | GET, POST | `routes/prescriptions.js` | Manage prescriptions |
+| `/feedback` | GET, POST | `routes/feedback.js` | Submit & view feedback |
+| `/records` | GET, POST | `routes/records.js` | Upload & list file records |
+| `/records/:filename` | GET | `routes/records.js` | Download a specific file |
+
+**Code reference** — [app.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/app.js#L28-L32):
+```js
+app.use('/appointments', appointmentsRouter)
+app.use('/records', recordsRouter)
+app.use('/feedback', feedbackRouter)
+app.use('/prescriptions', prescriptionsRouter)
+```
+
+---
+
+### ✅ Dynamic Routing
+**Status: Implemented**
+
+A dynamic route in `routes/records.js` uses a **URL parameter** (`:filename`) to accept any filename and stream that specific file back to the client.
+
+**Code reference** — [records.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/routes/records.js#L74-L87):
+```js
+router.get('/:filename', (req, res) => {
+  const filePath = path.join(UPLOADS_DIR, req.params.filename)
+  // req.params.filename is dynamic — changes per request
+  ...
+})
+```
+
+> `GET /records/1720000000000-report.pdf` → serves that exact file.
+> `GET /records/1720000000001-xray.jpg` → serves a different file.
+
+---
+
+### ✅ Static Files — How They Are Served
+**Status: Implemented**
+
+Express serves static files from the `zenith-backend/public/` folder using the built-in `express.static` middleware.
+
+**Code reference** — [app.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/app.js#L25-L26):
+```js
+// Any file placed in zenith-backend/public/ is served automatically
+app.use(express.static(path.join(__dirname, 'public')))
+```
+
+> **How it works**: When a request comes in (e.g. `GET /logo.png`), Express looks for `zenith-backend/public/logo.png`. If found, it sends the file directly — no route handler needed. If not found, it passes to the next middleware.
+
+---
+
+### ✅ File Handling
+**Status: Implemented**
+
+Two types of file handling exist:
+
+**1. JSON file persistence** (all routes) — reading and writing `.json` data files using Node's `fs` module:
+```js
+// Read
+const raw = fs.readFileSync(DATA_FILE, 'utf-8')
+return JSON.parse(raw)
+
+// Write
+fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2), 'utf-8')
+```
+
+**2. Multipart file uploads** (records route) — using **Multer** middleware to accept file uploads from the frontend via `multipart/form-data`:
+
+**Code reference** — [records.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/routes/records.js#L16-L23):
+```js
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+  filename: (req, file, cb) => {
+    const safeName = Date.now() + '-' + file.originalname.replace(/\s+/g, '_')
+    cb(null, safeName)
+  },
+})
+const upload = multer({ storage })
+```
+Uploaded files are stored in `zenith-backend/uploads/`. Metadata (filename, size, mimetype) is saved to `data/records.json`.
+
+---
+
+### ✅ File Streaming
+**Status: Implemented**
+
+The `GET /records/:filename` endpoint **streams** a file to the browser using Node.js `ReadStream` piped directly into the HTTP response — instead of loading the entire file into memory first.
+
+**Code reference** — [records.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/routes/records.js#L81-L86):
+```js
+const stat = fs.statSync(filePath)
+res.setHeader('Content-Length', stat.size)
+res.setHeader('Content-Disposition', `attachment; filename="${req.params.filename}"`)
+
+const readStream = fs.createReadStream(filePath)
+readStream.pipe(res)  // ← streams chunks, not the whole file at once
+```
+
+> **Why streaming?** For large files (e.g. X-rays, PDFs), reading the whole file into memory with `fs.readFile()` would crash the server. Streaming sends chunks progressively, keeping memory usage low.
+
+---
+
+### ✅ Middleware
+**Status: Implemented**
+
+Three types of middleware are used in `app.js`:
+
+| Middleware | Type | Purpose |
+|---|---|---|
+| `express.json()` | Built-in | Parses JSON request bodies |
+| `express.urlencoded()` | Built-in | Parses form-encoded bodies |
+| Custom CORS function | Custom | Adds CORS headers for the Next.js frontend |
+| `express.static()` | Built-in | Serves files from `/public` |
+| Error handler (4 args) | Custom | Catches all unhandled server errors |
+| 404 handler | Custom | Returns JSON error for unknown routes |
+| `multer` | Third-party | Handles multipart file uploads in `/records` |
+
+**Code reference** — [app.js](file:///Users/muskaan/Downloads/Zenith/zenith-backend/app.js#L12-L22):
+```js
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+
+// Custom CORS middleware
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+  if (req.method === 'OPTIONS') return res.sendStatus(200)
+  next()  // ← passes control to the next middleware/route
+})
+```
+
+---
+
+## Syllabus Scope Note
+
+This summary now keeps focus on the backend evaluation syllabus topics only. Extra project checklist topics outside the syllabus scope, such as separate libuv/thread deep dives, have been removed from this file.
