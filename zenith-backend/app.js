@@ -51,16 +51,25 @@ app.use(
     },
   }),
 )
-app.use(passport.initialize())
-
 app.use((req, res, next) => {
   req.requestFlow.push('cors-middleware')
-  const allowedOrigins = new Set(['http://localhost:3000', 'http://localhost:3002'])
+
+  const allowedOrigins = new Set([
+    'http://localhost:3000',
+    'http://localhost:3002',
+
+    // Deployed frontend on Vercel
+    'https://zenith-sem4-gp2n-mut2x28dq-aria18jane-gmailcoms-projects.vercel.app',
+  ])
+
   const requestOrigin = req.headers.origin
+
   if (requestOrigin && allowedOrigins.has(requestOrigin)) {
     res.setHeader('Access-Control-Allow-Origin', requestOrigin)
   }
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+
+  res.setHeader('Vary', 'Origin')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS')
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization')
   res.setHeader('Access-Control-Allow-Credentials', 'true')
 
